@@ -1,0 +1,2 @@
+﻿The purpose of our service layer will be to house our logic for using Entity Framework to interact with our database. 
+Our services will be used by our WebApi and our MVC app to do the heavy lifting for our database CRUD operations.
