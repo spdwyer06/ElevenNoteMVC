@@ -1,0 +1,7 @@
+﻿@model System.DateTimeOffset?
+
+    <span>
+        @*G is for General date/time pattern (long time)*@
+        @(Model.HasValue ? Model.Value.LocalDateTime.ToString("G") : "-")
+    </span>
+
