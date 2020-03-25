@@ -39,12 +39,32 @@ namespace ElevenNoteMVC.Controllers
                 return View(model);
             }
 
+            var service = CreateNoteService();
+
+            if (service.CreateNote(model))
+            {
+                // TempData removes information after it's accessed
+                TempData["SaveResult"] = "Your note was created.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Note could not be created.");
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var service = CreateNoteService();
+            var model = service.GetNoteByID(id);
+
+            return View(model);
+        }
+
+        private NoteService CreateNoteService()
+        {
             var userID = Guid.Parse(User.Identity.GetUserId());
             var service = new NoteService(userID);
-
-            service.CreateNote(model);
-
-            return RedirectToAction("Index");
+            return service;
         }
     }
 }
